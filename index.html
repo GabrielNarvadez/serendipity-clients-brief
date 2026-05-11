@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Haley Meeting Prep — Solheim & Global Basecamps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1f3a5f;
+    --navy-deep: #16304f;
+    --navy-ink: #11243b;
+    --coral: #ee6e6e;
+    --coral-dark: #d85a5a;
+    --coral-glow: rgba(238,110,110,0.4);
+    --paper: #ffffff;
+    --cream: #fafafa;
+    --rule: #e6ebf2;
+    --muted: #5a6b80;
+    --text: #1b2a3d;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Scroll progress */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--coral) 0%, #ffb88a 100%);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 12px var(--coral-glow);
+  }
+
+  /* Header */
+  header.site {
+    padding: 28px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .logo svg path.chart-line {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawLine 1.4s ease-out 0.3s forwards;
+  }
+  .logo svg circle {
+    opacity: 0;
+    animation: popDot 0.4s ease-out forwards;
+  }
+  .logo svg circle:nth-child(2) { animation-delay: 0.9s; }
+  .logo svg circle:nth-child(3) { animation-delay: 1.1s; }
+  .logo svg circle:nth-child(4) { animation-delay: 1.3s; }
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  @keyframes popDot {
+    0% { opacity: 0; transform: scale(0); transform-origin: center; }
+    60% { transform: scale(1.4); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  nav.site-nav {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  nav.site-nav a {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--navy);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s;
+  }
+  nav.site-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 50%;
+    width: 0; height: 2px;
+    background: var(--coral);
+    transition: all 0.25s ease;
+    transform: translateX(-50%);
+  }
+  nav.site-nav a:hover::after { width: 100%; }
+  nav.site-nav a:hover { color: var(--coral); }
+
+  .btn {
+    display: inline-block;
+    background: var(--coral);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px var(--coral-glow);
+  }
+  .btn:hover { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 8px 22px var(--coral-glow); }
+  .btn:active { transform: translateY(0); }
+
+  /* Hero */
+  .hero {
+    padding: 60px 56px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--coral);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
+  }
+  h1.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    color: var(--navy);
+    font-size: 64px;
+    line-height: 1.04;
+    text-transform: uppercase;
+    margin: 0 0 24px 0;
+    letter-spacing: -1px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out 0.35s forwards;
+  }
+  h1.hero-title .accent {
+    background: linear-gradient(120deg, var(--coral) 0%, #ff9876 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p.lede {
+    font-size: 19px;
+    color: var(--navy);
+    max-width: 720px;
+    margin: 0 0 8px 0;
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out 0.55s forwards;
+  }
+  .hero ul.targets {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0 0;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out 0.7s forwards;
+  }
+  .hero ul.targets li {
+    background: #f1f5fa;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .hero ul.targets li:hover {
+    background: var(--navy);
+    color: #fff;
+    transform: translateY(-2px) rotate(-1deg);
+  }
+  .hero-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out 0.85s forwards;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--navy);
+    border: 2px solid var(--navy);
+    box-shadow: none;
+    padding: 10px 26px;
+  }
+  .btn-ghost:hover { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(31,58,95,0.3); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Floating chess pieces in hero background */
+  .floating-pieces {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .floating-pieces span {
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.04;
+    animation: float 12s ease-in-out infinite;
+  }
+  .floating-pieces span:nth-child(1) { top: 10%; left: 70%; animation-delay: 0s; }
+  .floating-pieces span:nth-child(2) { top: 60%; left: 80%; animation-delay: 3s; font-size: 60px; }
+  .floating-pieces span:nth-child(3) { top: 30%; left: 90%; animation-delay: 6s; font-size: 100px; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-30px) rotate(5deg); }
+  }
+
+  /* Banner with flying rocket */
+  .banner {
+    background: var(--navy);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 14px 14px, 26px 26px;
+    background-position: 0 0, 7px 7px;
+    margin: 40px 0;
+  }
+  .banner .rocket {
+    display: inline-block;
+    animation: rocketBob 1.5s ease-in-out infinite;
+  }
+  @keyframes rocketBob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-4px) rotate(4deg); }
+  }
+  .banner .flying-rocket {
+    position: absolute;
+    top: 50%;
+    left: -80px;
+    transform: translateY(-50%);
+    font-size: 28px;
+    animation: flyAcross 8s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(255,180,100,0.6));
+  }
+  @keyframes flyAcross {
+    0% { left: -80px; transform: translateY(-50%) rotate(-10deg); }
+    50% { transform: translateY(-70%) rotate(0deg); }
+    100% { left: 110%; transform: translateY(-50%) rotate(10deg); }
+  }
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  /* Section */
+  section.block {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 56px 24px;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  h2.section {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--navy);
+    font-size: 32px;
+    letter-spacing: -0.3px;
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--coral);
+    display: inline-block;
+  }
+  h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--navy-ink);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 28px 0 10px 0;
+  }
+  h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 20px 0 8px 0;
+  }
+  p { margin: 0 0 14px 0; }
+  ul, ol { margin: 0 0 14px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin: 24px 0;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: 0 1px 0 rgba(31,58,95,0.03);
+    transition: all 0.3s cubic-bezier(.2,.7,.3,1);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--coral), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(31,58,95,0.10);
+    border-color: rgba(238,110,110,0.4);
+  }
+  .card:hover::before { transform: scaleX(1); }
+  .card .num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    color: var(--coral);
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 8px;
+    transition: transform 0.3s;
+  }
+  .card:hover .num { transform: scale(1.1) rotate(-3deg); }
+  .card h4 { margin-top: 0; }
+
+  /* Client header */
+  .client-hero {
+    background: linear-gradient(180deg, #f6f9fd 0%, #ffffff 100%);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 36px 40px;
+    margin: 28px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .client-hero::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, var(--coral-glow) 0%, transparent 70%);
+    opacity: 0.4;
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.15); opacity: 0.5; }
+  }
+  .client-hero .tag {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .client-hero h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    color: var(--navy);
+    font-size: 40px;
+    font-weight: 900;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+  .client-hero .what {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 760px;
+  }
+
+  /* People row */
+  .people {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 18px 0 8px;
+  }
+  .person {
+    background: #fff;
+    border-left: 4px solid var(--coral);
+    padding: 14px 18px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(31,58,95,0.04);
+    transition: all 0.25s ease;
+    cursor: default;
+  }
+  .person:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 18px rgba(31,58,95,0.08);
+    border-left-width: 8px;
+  }
+  .person .name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .person .role {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .person ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  /* Help block */
+  .help {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 16px 0;
+    transition: all 0.3s ease;
+  }
+  .help:hover { box-shadow: 0 8px 26px rgba(31,58,95,0.08); }
+  .help .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 14px;
+  }
+  .help .skills span {
+    background: #f1f5fa;
+    color: var(--navy);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .help .skills span:hover {
+    background: var(--navy);
+    color: #fff;
+    transform: scale(1.08);
+  }
+  .quote {
+    border-left: 4px solid var(--coral);
+    padding: 8px 0 8px 18px;
+    margin: 14px 0;
+    font-style: italic;
+    color: var(--navy);
+    font-size: 16px;
+  }
+  .columns-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 12px;
+  }
+
+  /* Celebrity reveal — click to flip */
+  .celeb-wrap {
+    perspective: 1200px;
+    margin: 22px 0;
+  }
+  .celeb {
+    position: relative;
+    height: 200px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(.6,.0,.2,1);
+    cursor: pointer;
+  }
+  .celeb.flipped { transform: rotateY(180deg); }
+  .celeb .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .celeb .front {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    background-size: 14px 14px, 100% 100%;
+  }
+  .celeb .front .question {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--coral);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .celeb .front .label {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 8px;
+  }
+  .celeb .front .reveal-hint {
+    margin-top: 12px;
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+    animation: pulse-text 2s ease-in-out infinite;
+  }
+  @keyframes pulse-text {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  .celeb .back {
+    background: linear-gradient(135deg, var(--coral) 0%, #ff9876 100%);
+    color: #fff;
+    transform: rotateY(180deg);
+  }
+  .celeb .back h4 {
+    color: #fff;
+    margin: 0 0 12px 0;
+    font-size: 32px;
+    text-transform: none;
+    letter-spacing: -0.5px;
+  }
+  .celeb .back ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .celeb .back ul li {
+    background: rgba(255,255,255,0.18);
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* Positioning / pitch */
+  .pitch {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    padding: 44px 48px;
+    border-radius: 18px;
+    margin: 28px 0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    background-size: 16px 16px, 100% 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .pitch h2 { color: #fff; border-color: var(--coral); }
+  .pitch .speech {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+    border-left: 4px solid var(--coral);
+    padding-left: 22px;
+    margin: 18px 0;
+  }
+
+  /* Discovery question cards */
+  .q-topic {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 16px;
+  }
+  .q-topic .tag {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .q-topic .rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--rule), transparent);
+  }
+  .q-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 8px;
+  }
+  .q-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 26px 28px 24px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s cubic-bezier(.2,.7,.3,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .q-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--coral);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+  }
+  .q-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(31,58,95,0.10);
+    border-color: rgba(238,110,110,0.4);
+  }
+  .q-card:hover::before { transform: scaleY(1); }
+  .q-card .qmark {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f1f5fa;
+    color: var(--coral);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .q-card:hover .qmark {
+    background: var(--coral);
+    color: #fff;
+    transform: scale(1.08);
+  }
+  .q-card p {
+    margin: 0;
+    color: var(--navy-ink);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.45;
+    padding-top: 8px;
+  }
+
+  /* Chess analogy board */
+  .chess-section {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 32px;
+    margin: 28px 0;
+  }
+  .chess-pair {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: center;
+    margin: 22px 0;
+  }
+  .chess-board {
+    width: 200px; height: 200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(31,58,95,0.15);
+    flex-shrink: 0;
+  }
+  .chess-board > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .chess-board > div:nth-child(odd) { background: #f1e6d2; }
+  .chess-board > div:nth-child(even) { background: var(--navy); }
+  .chess-board > div:nth-child(4n+1) { background: var(--navy); }
+  .chess-board > div:nth-child(4n+2) { background: #f1e6d2; }
+  .chess-board > div:nth-child(4n+3) { background: var(--navy); }
+  .chess-board > div:nth-child(4n) { background: #f1e6d2; }
+  .chess-piece {
+    transition: transform 1.5s cubic-bezier(.6,.0,.2,1);
+    cursor: pointer;
+  }
+  .chess-piece:hover { animation: wiggle 0.4s ease; }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
+  }
+  .chess-line {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+  .chess-line .for-who {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--coral);
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: 10px;
+  }
+
+  /* Final */
+  .final {
+    background: #fff;
+    border: 2px solid var(--navy);
+    border-radius: 18px;
+    padding: 36px 40px;
+    margin: 28px 0 60px;
+  }
+  .final .twin {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 28px;
+    margin: 24px 0;
+    align-items: center;
+  }
+  .final .twin .who {
+    text-align: center;
+    padding: 28px;
+    background: #f6f9fd;
+    border-radius: 12px;
+    transition: all 0.3s;
+  }
+  .final .twin .who:hover { transform: translateY(-4px); background: var(--navy); color: #fff; }
+  .final .twin .who:hover .name { color: #fff; }
+  .final .twin .who:hover .sells { color: #ff9876; }
+  .final .twin .who .name {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 20px;
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+  .final .twin .who .sells {
+    color: var(--coral);
+    font-weight: 700;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+  .final .twin .equals {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    color: var(--coral);
+    font-weight: 900;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  footer.site {
+    background: var(--navy);
+    color: #fff;
+    text-align: center;
+    padding: 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer.site span { color: var(--coral); }
+
+  @media (max-width: 900px) {
+    .card-grid, .people, .columns-2, .final .twin { grid-template-columns: 1fr; }
+    header.site, .hero, section.block { padding-left: 24px; padding-right: 24px; }
+    nav.site-nav { display: none; }
+    h1.hero-title { font-size: 42px; }
+    .client-hero h2 { font-size: 28px; }
+    .chess-pair { grid-template-columns: 1fr; }
+    .chess-board { width: 160px; height: 160px; margin: 0 auto; }
+    .final .twin { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="site">
+  <div class="logo" id="logo">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="chart-line" d="M3 18 L9 10 L13 14 L21 4" stroke="#1f3a5f" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="9" cy="10" r="1.8" fill="#1f3a5f"/>
+      <circle cx="13" cy="14" r="1.8" fill="#1f3a5f"/>
+      <circle cx="21" cy="4" r="1.8" fill="#1f3a5f"/>
+    </svg>
+    serendipity
+  </div>
+  <nav class="site-nav">
+    <a href="#solheim">Solheim</a>
+    <a href="#basecamps">Global Basecamps</a>
+    <a href="#positioning">Positioning</a>
+    <a href="#questions">Questions</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="floating-pieces">
+    <span>♚</span><span>♞</span><span>♛</span>
+  </div>
+  <div class="eyebrow">A Note for Haley</div>
+  <h1 class="hero-title">How I'd Show Up<br>For <span class="accent">Solheim & Global Basecamps</span></h1>
+  <p class="lede">My read on the two clients and where I think I can be most useful — framed through Serendipity's positioning as <em>The B2B Marketing and HubSpot Maximization Agency</em>.</p>
+  <ul class="targets">
+    <li>Solheim Senior Community</li>
+    <li>Global Basecamps</li>
+  </ul>
+</section>
+
+<div class="banner">
+  <span class="flying-rocket">🚀</span>
+  <span class="star" style="top:30%;left:20%"></span>
+  <span class="star" style="top:60%;left:60%;animation-delay:0.5s"></span>
+  <span class="star" style="top:40%;left:85%;animation-delay:1s"></span>
+  Build the Funnel <span class="rocket">🚀</span> Drive Revenue
+</div>
+
+<!-- The Frame -->
+<section class="block reveal">
+  <h2 class="section">The Frame</h2>
+  <p>The goal in this meeting is <strong>not</strong> to sound like “just a designer,” “just a developer,” or “just automation.” It's to sound like someone who understands how <strong>operations, customer experience, and systems</strong> connect — where CTO + UX + automation background becomes powerful.</p>
+
+  <h3>What Serendipity actually sells</h3>
+  <div class="card-grid">
+    <div class="card"><div class="num" data-count="1">01</div><h4>Scalable Growth Systems</h4><p>Revenue predictability and sales/marketing alignment — not isolated marketing tactics.</p></div>
+    <div class="card"><div class="num" data-count="2">02</div><h4>HubSpot Maximization</h4><p>Deep integration so HubSpot becomes the operational nervous system, not a contact database.</p></div>
+    <div class="card"><div class="num" data-count="3">03</div><h4>Operational Clarity</h4><p>Remove revenue uncertainty through visibility, automation, and alignment across functions.</p></div>
+  </div>
+  <p>Every observation should connect back to: <strong>funnel optimization · operational efficiency · scalable systems · customer experience · HubSpot opportunities</strong>.</p>
+</section>
+
+<!-- CLIENT 1 -->
+<section class="block reveal" id="solheim">
+  <div class="client-hero">
+    <div class="tag">Client 01</div>
+    <h2>Solheim Senior Community</h2>
+    <p class="what">A nonprofit, faith-based senior living organization focused on long-term care, dignity, and community trust. High trust · emotionally sensitive · relationship-driven · operationally complex.</p>
+  </div>
+
+  <h3>Who we likely work with</h3>
+  <div class="people">
+    <div class="person">
+      <div class="name">Sam Oden</div>
+      <div class="role">The "King" Piece — Long-Term Stability</div>
+      <ul><li>Occupancy</li><li>Sustainability</li><li>Modernization</li><li>Reputation</li><li>Resident & family trust</li></ul>
+    </div>
+    <div class="person">
+      <div class="name">Marketing / Community Relations</div>
+      <div class="role">Top-of-Funnel Owner</div>
+      <ul><li>Tours & occupancy funnel</li><li>Family communication</li><li>Trust-building</li><li>Reputation</li></ul>
+    </div>
+    <div class="person">
+      <div class="name">HR / Operations</div>
+      <div class="role">Inside-the-Building</div>
+      <ul><li>Staffing</li><li>Internal communication</li><li>Operational efficiency</li><li>Retention</li></ul>
+    </div>
+  </div>
+
+  <h3>Tailored ways I can help</h3>
+
+  <div class="help">
+    <h4>1 · Trust-based website & UX optimization</h4>
+    <div class="skills"><span>UI/UX</span><span>Frontend systems</span><span>Emotional experience design</span></div>
+    <div class="quote">"In senior living, the website isn't just informational — it's emotional reassurance for families."</div>
+    <div class="columns-2">
+      <div><strong>Potential improvements</strong><ul><li>Accessibility</li><li>Trust-focused layouts</li><li>Easier inquiry paths</li><li>Mobile optimization</li><li>Testimonials / social proof</li><li>Cleaner tour booking flows</li></ul></div>
+      <div><strong>Connects to Serendipity</strong><ul><li>Funnel conversion</li><li>Lead quality</li><li>Occupancy pipeline</li></ul></div>
+    </div>
+  </div>
+
+  <div class="help">
+    <h4>2 · Family communication & CRM automation</h4>
+    <div class="skills"><span>HubSpot</span><span>Automation</span><span>Workflows</span><span>CRM</span></div>
+    <div class="quote">"Senior living decisions happen over time. Good automation keeps communication warm and consistent — without feeling robotic."</div>
+    <div class="columns-2">
+      <div><strong>Potential improvements</strong><ul><li>Inquiry nurturing</li><li>Automated follow-ups</li><li>Lead-stage tracking</li><li>Internal visibility dashboards</li><li>Family communication systems</li></ul></div>
+      <div><strong>Connects to Serendipity</strong><ul><li>Sales–marketing alignment</li><li>Predictable lead nurturing</li><li>Occupancy growth</li></ul></div>
+    </div>
+  </div>
+
+  <div class="help">
+    <h4>3 · Operational workflow simplification</h4>
+    <div class="skills"><span>CTO systems thinking</span><span>Dashboards</span><span>Automation strategy</span></div>
+    <div class="quote">"The goal isn't replacing human care — it's reducing operational friction so staff can focus more on residents."</div>
+    <div class="columns-2">
+      <div><strong>Potential improvements</strong><ul><li>Internal workflows</li><li>Onboarding systems</li><li>Staff dashboards</li><li>Repetitive-task automation</li><li>Communication visibility</li></ul></div>
+      <div><strong>Why it lands</strong><ul><li>Lets nonprofit budget stretch further</li><li>Improves retention indirectly</li><li>Increases family-facing responsiveness</li></ul></div>
+    </div>
+  </div>
+
+  <h3>Notable patterns & quirks</h3>
+  <ul>
+    <li><strong>Emotional industry</strong> — families buy on trust, warmth, responsiveness.</li>
+    <li><strong>Nonprofit + faith-based</strong> — messaging needs empathy, dignity, mission alignment.</li>
+    <li><strong>Older demographic UX</strong> — readability, simplicity, accessibility.</li>
+  </ul>
+
+  <div class="celeb-wrap">
+    <div class="celeb" onclick="this.classList.toggle('flipped')">
+      <div class="face front">
+        <div class="question">?</div>
+        <div class="label">Celebrity Comparison</div>
+        <div class="reveal-hint">Click to reveal</div>
+      </div>
+      <div class="face back">
+        <h4>Keanu Reeves</h4>
+        <ul><li>Calm</li><li>Trusted</li><li>Compassionate</li><li>Authentic</li><li>Quietly respected</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT 2 -->
+<section class="block reveal" id="basecamps">
+  <div class="client-hero">
+    <div class="tag">Client 02</div>
+    <h2>Global Basecamps</h2>
+    <p class="what">A luxury / adventure travel company offering curated, personalized global experiences. They sell aspiration · exclusivity · emotional experiences · authenticity.</p>
+  </div>
+
+  <h3>Who we likely work with</h3>
+  <div class="people">
+    <div class="person">
+      <div class="name">Michael D'Amico</div>
+      <div class="role">Growth & Partnerships</div>
+      <ul><li>Growth</li><li>Partnerships</li><li>Premium CX</li><li>Scalability</li><li>Brand quality</li></ul>
+    </div>
+    <div class="person">
+      <div class="name">Travel Specialist / Sales</div>
+      <div class="role">Operationally Stretched</div>
+      <ul><li>Personalization</li><li>Client communication</li><li>Conversion</li><li>Itinerary coordination</li></ul>
+    </div>
+    <div class="person">
+      <div class="name">Rachel McGuire (likely)</div>
+      <div class="role">Operations Leadership</div>
+      <ul><li>Coordination</li><li>Logistics</li><li>Delivery consistency</li><li>Operational efficiency</li></ul>
+    </div>
+  </div>
+
+  <h3>Tailored ways I can help</h3>
+
+  <div class="help">
+    <h4>1 · Premium digital experience optimization</h4>
+    <div class="skills"><span>UI/UX</span><span>Frontend systems</span><span>Storytelling-focused design</span></div>
+    <div class="quote">"Luxury brands are judged instantly through digital experience consistency."</div>
+    <div class="columns-2">
+      <div><strong>Potential improvements</strong><ul><li>Inquiry flows</li><li>Premium landing pages</li><li>Itinerary presentation</li><li>Onboarding UX</li><li>Mobile responsiveness</li></ul></div>
+      <div><strong>Connects to Serendipity</strong><ul><li>Lead conversion</li><li>Premium perception</li><li>Funnel quality</li></ul></div>
+    </div>
+  </div>
+
+  <div class="help">
+    <h4>2 · Personalized automation systems</h4>
+    <div class="skills"><span>HubSpot</span><span>CRM workflows</span><span>Automation systems</span></div>
+    <div class="quote">"Automation should reduce operational load without making the client experience feel automated."</div>
+    <div class="columns-2">
+      <div><strong>Potential improvements</strong><ul><li>Lead routing</li><li>CRM tagging</li><li>Follow-up workflows</li><li>Reminder systems</li><li>Pipeline visibility</li></ul></div>
+      <div><strong>Connects to Serendipity</strong><ul><li>Scalable growth</li><li>Sales enablement</li><li>Predictable operations</li></ul></div>
+    </div>
+  </div>
+
+  <div class="help">
+    <h4>3 · Internal operational visibility</h4>
+    <div class="skills"><span>CTO / systems thinking</span><span>Process optimization</span><span>Dashboards</span></div>
+    <div class="quote">"Highly customized businesses often become operationally chaotic internally."</div>
+    <div class="columns-2">
+      <div><strong>Potential improvements</strong><ul><li>Centralized systems</li><li>Operational dashboards</li><li>Coordination workflows</li><li>Client tracking systems</li></ul></div>
+      <div><strong>Why it lands</strong><ul><li>Scaling personalization is hard</li><li>High-touch model needs visibility</li><li>Specialists are stretched thin</li></ul></div>
+    </div>
+  </div>
+
+  <h3>Notable patterns & quirks</h3>
+  <ul>
+    <li><strong>They sell emotion</strong> — not travel. Transformation.</li>
+    <li><strong>High-touch business model</strong> — scaling personalization is the big CRM / automation opportunity.</li>
+    <li><strong>Luxury demands consistency</strong> — website, email, onboarding, and follow-up must feel cohesive.</li>
+  </ul>
+
+  <div class="celeb-wrap">
+    <div class="celeb" onclick="this.classList.toggle('flipped')">
+      <div class="face front">
+        <div class="question">?</div>
+        <div class="label">Celebrity Comparison</div>
+        <div class="reveal-hint">Click to reveal</div>
+      </div>
+      <div class="face back">
+        <h4>Anthony Bourdain</h4>
+        <ul><li>Authentic</li><li>Sophisticated</li><li>Meaningful</li><li>Cultural immersion</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section class="block reveal" id="positioning">
+  <div class="pitch">
+    <h2 class="section">My Personal Positioning</h2>
+    <p style="color:#cbd6e3;max-width:700px">Position myself as someone who understands both <strong style="color:#fff">operational systems</strong> and <strong style="color:#fff">customer experience</strong> — the intersection, not the individual pieces.</p>
+
+    <div class="speech">
+      "Most of my background sits between automation systems, operational workflows, and user experience. I look at businesses from two angles: how efficiently they operate internally, and how customers emotionally experience them externally."
+    </div>
+  </div>
+
+  <div class="chess-section">
+    <h3 style="margin-top:0">Two analogies I'd use</h3>
+
+    <div class="chess-pair">
+      <div class="chess-board" data-board="solheim">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div class="chess-piece" id="kingSolheim" style="font-size:42px;cursor:pointer">♚</div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+      <div class="chess-line">
+        <span class="for-who">For Solheim</span>
+        "Senior living reminds me of positional chess — trust and consistency matter more than aggressive moves."
+      </div>
+    </div>
+
+    <div class="chess-pair">
+      <div class="chess-board" data-board="basecamps">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div class="chess-piece" id="kingBasecamps" style="font-size:42px;cursor:pointer">♚</div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+      <div class="chess-line">
+        <span class="for-who">For Global Basecamps</span>
+        "Luxury travel is like chess preparation. Clients only see the elegant final experience — behind it, many coordinated systems working quietly."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section class="block reveal" id="questions">
+  <h2 class="section">What I'd Love Your Read On</h2>
+  <p style="color:var(--muted);max-width:680px">A few things I'd like to learn from you in the meeting — so I can show up most useful to Solheim and Global Basecamps from day one.</p>
+
+  <div class="q-topic">
+    <span class="tag">Serendipity's Work</span>
+    <span class="rule"></span>
+  </div>
+  <div class="q-grid">
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>Which area creates the most value for these clients today — lead generation, operations, or CRM optimization?</p>
+    </div>
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>What usually blocks these companies from scaling efficiently?</p>
+    </div>
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>How deeply integrated is HubSpot into their operations currently?</p>
+    </div>
+  </div>
+
+  <div class="q-topic">
+    <span class="tag">Solheim Senior Community</span>
+    <span class="rule"></span>
+  </div>
+  <div class="q-grid">
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>Are they more focused on occupancy growth or operational modernization?</p>
+    </div>
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>What communication challenges show up most often with families or staff?</p>
+    </div>
+  </div>
+
+  <div class="q-topic">
+    <span class="tag">Global Basecamps</span>
+    <span class="rule"></span>
+  </div>
+  <div class="q-grid">
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>Where does personalization become operationally difficult for them?</p>
+    </div>
+    <div class="q-card">
+      <div class="qmark">?</div>
+      <p>Do they struggle more with lead quality or internal coordination?</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="block reveal">
+  <div class="final">
+    <h2 class="section">Final Strategic Insight</h2>
+    <p>Both companies look different on the surface, but underneath they're remarkably similar.</p>
+    <div class="twin">
+      <div class="who">
+        <div class="name">Solheim</div>
+        <div class="sells">Trust + Care</div>
+      </div>
+      <div class="equals">=</div>
+      <div class="who">
+        <div class="name">Global Basecamps</div>
+        <div class="sells">Experience + Aspiration</div>
+      </div>
+    </div>
+    <p>Both rely heavily on <strong>emotional customer journeys</strong>, <strong>operational coordination</strong>, <strong>relationship management</strong>, and <strong>trust-building over time</strong>.</p>
+    <p>Which is exactly where <strong>HubSpot · automation · UX · systems thinking</strong> become powerful — and where my profile fits Serendipity's positioning.</p>
+  </div>
+</section>
+
+<footer class="site">
+  Build the Funnel <span>🚀</span> Drive Revenue
+</footer>
+
+
+<script>
+  // ---- Scroll progress ----
+  const progress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+  });
+
+  // ---- Reveal on scroll ----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---- Chess piece moves ----
+  function moveChessPiece(boardSelector, pieceId, targetCell) {
+    const board = document.querySelector(boardSelector);
+    const cells = board.children;
+    const piece = document.getElementById(pieceId);
+    // Move the piece into the target cell
+    const target = cells[targetCell];
+    if (target && !target.querySelector('.chess-piece')) {
+      target.appendChild(piece);
+    }
+  }
+  document.getElementById('kingSolheim').addEventListener('click', () => {
+    // Move from cell 5 to cell 10 (diagonal-ish)
+    const board = document.querySelector('[data-board="solheim"]');
+    const piece = document.getElementById('kingSolheim');
+    const cells = board.children;
+    const currentParent = piece.parentElement;
+    const currentIdx = Array.from(cells).indexOf(currentParent);
+    const targetIdx = currentIdx === 5 ? 10 : 5;
+    cells[targetIdx].appendChild(piece);
+  });
+  document.getElementById('kingBasecamps').addEventListener('click', () => {
+    const board = document.querySelector('[data-board="basecamps"]');
+    const piece = document.getElementById('kingBasecamps');
+    const cells = board.children;
+    const currentParent = piece.parentElement;
+    const currentIdx = Array.from(cells).indexOf(currentParent);
+    const targetIdx = currentIdx === 6 ? 9 : 6;
+    cells[targetIdx].appendChild(piece);
+  });
+
+</script>
+</body>
+</html>
